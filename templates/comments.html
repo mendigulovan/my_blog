@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/">Head</a>
+<br>
+{% for i in comments %}
+    <a>{{ i.autor }}</a>
+    <h4>{{ i.text }}</h4>
+{% endfor %}
+</body>
+</html>

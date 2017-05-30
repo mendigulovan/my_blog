@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %}
+ <header class="intro-header" style="background-image:
+         {% if category.image %}
+         url({{ category.image.url }})">
+         {% else %}
+        url({% static 'img/home-bg.jpg' %})">
+        {% endif %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>{{ category.name }}</h1>
+                        <hr class="small">
+                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+ <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            {% if posts %}
+                {% for i in posts %}
+                <div class="post-preview">
+                    <a href="/article/{{ i.id }}/">
+                        <h2 class="post-title">
+                            {{ i.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{ i.text }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
+                </div>
+
+                <hr>
+               {% endfor %}
+            {% else %}
+            <h1>No posts for category {{ category.name }}</h1>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

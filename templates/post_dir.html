@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %}
+    <header class="intro-header" style="background-image:
+            {% if article.image %}
+                url({{ article.image.url }})">
+            {% else %}
+                url({% static 'img/home-bg.jpg' %})">
+            {% endif %}>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>{{ article.title }}</h1>
+                    <hr class="small">
+                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ article.text|safe }}
+                </div>
+            </div>
+        </div>
+    </article>
+    <div class="row col-lg-offset-3 col-lg-6">
+    <form action="/add_comment/{{ article.id }}/" method="post">
+
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Author</label>
+                <input type="text" class="form-control" name ="author" id="author"
+                       required
+                       placeholder="Author">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Text</label>
+                <input type="text" class="form-control" name ="comment" id="comment" required placeholder="Your comment">
+            </div>
+
+
+            <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    </div>
+    <div class='container'>
+        <div class="row">
+            {% for i in comments %}
+                <div class="col-lg-offset-3 col-lg-6">
+                    <h3>{{ i.autor }}</h3>
+                    <p>{{ i.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
